@@ -33,18 +33,31 @@
 
     <!--請在這裡引用jQuery函式庫-->
     <script src="Scripts/jquery-3.3.1.min.js"></script>
+    在使用bootstrap要先有ˇ
     <script src="js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function () {
+        //$(document).ready(function () {
+        //    $('header').load('partial/header.html');
+        //    $('nav').load('partial/nav.html');
+        //    $('#section').load('partial/section.html');
+        //    $('footer').load('partial/footer.html');            
+
+        //    //找到h1標籤$('selectors')，設定h1的顏色css('color','blue')
+        //    $("h1").css("color", "orange");
+        //});
+        //$ 意同於jQuery;
+        //$(function () 意同於$(document).ready(function ()
+        $(function () {
             $('header').load('partial/header.html');
             $('nav').load('partial/nav.html');
             $('#section').load('partial/section.html');
-            $('footer').load('partial/footer.html');            
+            $('footer').load('partial/footer.html');
 
             //找到h1標籤$('selectors')，設定h1的顏色css('color','blue')
-
+            $("h1").css("color", "green");
 
         });
+
     </script>
 </body>
 

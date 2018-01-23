@@ -46,8 +46,68 @@
             $('#section').load('partial/section.html');
             $('footer').load('partial/footer.html');
 
-            //看到selectors重複時... Chaining 鏈式語法
+           
             //看到jQuery的方法重複使用時
+
+            //javascript寫法
+           // document.getElementById("myh").onmouseover = over;//
+            //document.getElementById("myh").addEventListener("mouseover", over);
+
+            //看到selectors重複時，要合併成一個 -> Chaining 鏈式語法
+            //$('selectors')
+            //原本要找三次 $('h1') 會浪費效能
+            //$('h1').css('background-color', 'lightgreen')
+            //$("h1").mouseover(over);
+            //$("h1").mouseout(out);
+            //==================================================
+            //鏈式語法 只要找一次H1 selectors
+            //$('h1').css('background-color', 'lightgreen')
+            //    .mouseover(over)
+            //    .mouseout(out);
+
+
+
+            //看到jQuery的方法重複使用時，可以查查也許有不同的參數組合
+            //https://api.jquery.com/css/
+            //$('h1').css('background-color', 'lightgreen')
+            //    .css('color', 'purple')
+            //    .css('padding', '10px')                
+            //    .mouseover(over)
+            //    .mouseout(out);
+            //==>改寫成
+
+            var o1 = { 'background-color': 'lightgreen', 'color': 'purple', 'padding': '5px', 'text-align': 'right' }
+            $('h1').css(o1)
+                .mouseover(over)
+                .mouseout(out);
+         
+
+            function over() {
+                //事件處裡程序,this表示觸發事件的物件
+                //console.log(this);
+                //javascript:this
+                // this.style.backgroundColor="pink";
+
+                //jquery:$(this)
+                $(this).css(o1)
+            }
+            function out() {
+                var o2 = { 'background-color': 'pink', 'color': 'blue', 'padding': '10px', 'text-align': 'center' }
+                $(this).css(o2)
+            }
+
+            //DOM 有效能的問題
+            //javascript寫法
+            //var hs = document.querySelectorAll('h1');
+            //for (var i = 0, max = hs.length; i < max; i++) {
+            //    hs[i].style.color = "green"
+            //    hs[i].addEventListener("mouseover", function () {
+            //        this.style.color = "red"
+            //    })
+            //    hs[i].addEventListener("mouseout", function () {
+            //        this.style.color = "green"
+            //    })
+            //}
         });
     </script>
 </body>

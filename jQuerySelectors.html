@@ -38,9 +38,9 @@
 
                         <hr />
 
-                        <input type="text" value="請輸入" /><br />
-                        <input type="text" value="請輸入" /><br />
-                        <input type="text" value="請輸入" /><br />
+                        <input type="text" placeholder="請輸入" class="tet"/><br />
+                        <input type="text" placeholder="請輸入" class="tet"/><br />
+                        <input type="text" placeholder="請輸入" class="tet"/><br />
                         <input type="button" value="送出" />
                         <hr />
 
@@ -73,8 +73,7 @@
         <footer class="footer"></footer>
 
     </div>
-
-    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -109,9 +108,20 @@
             //==== Child Filter Selectors ===========
 
             //=============================
-
+            $("input:text").css('background-color', 'lightgreen')
+                .focusin(focusthis)
+                .focusout(blurthis)
 
         });
+        function focusthis() {
+            var o1 = {'background-color':'green' };
+            $(this).css(o1)
+        }
+        function blurthis() {
+            var o2 = {'background-color':'pink'};
+            $(this).css(o2)
+        }
+
     </script>
 
 
