@@ -25,7 +25,11 @@
                         <a href="http://tw.yahoo.com">YAHOO</a> |
                         <a href="http://www.google.com.tw">Google</a>
                         <hr />
-                        <input type="text" id="txtName" /><input type="button" value="Click" id="buttonClick" /><span id="span1"></span>
+                        <input type="text" id="txtName2" />
+                        <input type="text" id="txtName" />
+                        <input type="button" value="Click" id="buttonClick" />
+                        <input type="password" placeholder="password" id="password" />
+                        <span id="span1"></span>
                         <br />
                         <select id="select1">
                             <option value="a">Item1</option>
@@ -36,7 +40,7 @@
                         <span id="span2"></span>
                         <hr />
                         <input type="button" value="check" id="buttonToggle" /><br />
-                         <input type="checkbox" id="Toggle" />Toggle All<br /> 
+                        <input type="checkbox" id="Toggle" />Toggle All<br />
                         <input type="checkbox" value="a1" name="a" />A1
                         <input type="checkbox" value="a2" name="a" />A2
                         <input type="checkbox" value="a3" name="a" />A3
@@ -68,22 +72,30 @@
             $('footer').load('partial/footer.html');
 
             //設定txtName中的值
-
+            $("#txtName").val("guest");
+            $("#txtName").focus(function () { $("#txtName").val("") });
+            $("#txtName").blur(function () { $("#txtName").val("guest") });
 
             $('#buttonClick').click(function () {
                 //將使用者輸入在txtName中的內容讀出顯示在span1中
                 //將使用者輸入在txtName中的內容讀出加上<h2>的標籤顯示在span1中
-
+                var v = $("#txtName").val();//讀出value值
+                $("#span1").text("hello" + v);//寫入
+                //$("#span1").text("<h2>hello" + v+"</h2>"); //把標籤當作純文字
+                 //$("#span1").html("<h2>hello" + v+"</h2>"); //把標籤當作純文字
+                console.log($("#span1").text());//讀取span標籤中的文字 顯示在console.log=>hello v
+                console.log($("#span1").html());//=><h2>hello v </h2>
             });
-
 
             $('#select1').change(function () {
                 //練習
                 //當使用者選取不同的select1項目時
                 //讀出此項目的索引值(index),文字(text),值(value)
                 //將這些資料顯示在span2的span中
-                //alert($(this).val());
-
+                //var v = $(this).val();
+                //var ind = $(this).index();
+               $("#span2").text($("#select1 :selected").text());
+               //$("#span2").text($("#select1 :selected").index());
 
             });
 

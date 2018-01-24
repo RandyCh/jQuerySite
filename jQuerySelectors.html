@@ -6,16 +6,20 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <style>
-/*.simpleTable {
+.simpleTable {
 	border: 1px solid green;
 	width: 300px;
-	border-collapse: collapse;
+	border-collapse:separate;
+
 }
 
 .simpleTable td, .simpleTable th {
-	border: 1px solid green;
-	padding: 10px;
-}*/
+        border: 1px solid green;
+        padding: 10px;
+        text-align: center;
+        
+        border-collapse:collapse;
+    }
 </style>
 
 </head>
@@ -45,22 +49,76 @@
                         <hr />
 
                         <table class="simpleTable">
-                            <tr>
-                                <td>A0</td>
-                                <td>B1</td>
-                                <td>C2</td>
-                            </tr>
-                            <tr>
-                                <td>D3</td>
-                                <td>E4</td>
-                                <td>F5</td>
-                            </tr>
-                            <tr>
-                                <td>G6</td>
-                                <td>H7</td>
-                                <td>I8</td>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th>Col1</th>
+                                    <th>Col2</th>
+                                    <th>Col3</th>
+                                </tr>
 
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>A0</td>
+                                    <td>B1</td>
+                                    <td>C2</td>
+                                </tr>
+                                <tr>
+                                    <td>D3</td>
+                                    <td>E4</td>
+                                    <td>F5</td>
+                                </tr>
+                                <tr>
+                                    <td>G6</td>
+                                    <td>H7</td>
+                                    <td>I8</td>
+                                </tr>
+                                <tr>
+                                    <td>A0</td>
+                                    <td>B1</td>
+                                    <td>C2</td>
+                                </tr>
+                                <tr>
+                                    <td>D3</td>
+                                    <td>E4</td>
+                                    <td>F5</td>
+                                </tr>
+                                <tr>
+                                    <td>G6</td>
+                                    <td>H7</td>
+                                    <td>I8</td>
+                                </tr>
+                                <tr>
+                                    <td>A0</td>
+                                    <td>B1</td>
+                                    <td>C2</td>
+                                </tr>
+                                <tr>
+                                    <td>D3</td>
+                                    <td>E4</td>
+                                    <td>F5</td>
+                                </tr>
+                                <tr>
+                                    <td>G6</td>
+                                    <td>H7</td>
+                                    <td>I8</td>
+                                </tr>
+                                <tr>
+                                    <td>A0</td>
+                                    <td>B1</td>
+                                    <td>C2</td>
+                                </tr>
+                                <tr>
+                                    <td>D3</td>
+                                    <td>E4</td>
+                                    <td>F5</td>
+                                </tr>
+                                <tr>
+                                    <td>G6</td>
+                                    <td>H7</td>
+                                    <td>I8</td>
+                                </tr>
+                            </tbody>
 
                         </table>
                         <!-- 每頁不同的內容到這裡結束 -->
@@ -85,9 +143,11 @@
             //==== Attribute Selectors ====
             //在pdf及doc的超連結前面加上小圖
             //css 參考用法如下
-            //text-decoration:none
+            //text-decoration:none //這個因為bootstrap所以不需要做
             //background:url(Images/pdf_icon.gif) no-repeat
             //padding-left:20px
+            $("a[href$='doc']").css({"background":"url(images/word_icon.gif) no-repeat","padding-left":"20px"});
+            $("a[href$='pdf']").css({"background":"url(images/pdf_icon.gif) no-repeat","padding-left":"20px"});
 
             //=============================
 
@@ -97,20 +157,48 @@
             //將E4的背景色，設定成紫色 background-color:purple
             //將A0-C2的背景色，設定成黃色 background-color:yellow
             //將G6-I8的背景色，設定成橘色 background-color:orange
+            //
+            //$(".simpleTable").css({ "border": "1px solid green", "width": "300px", "border-collapse":"collapse"});
+            //$(".simpleTable>tbody>tr>td,.simpleTable th").css({ "border": "1px solid green", "padding": "10px" });
+            //$(".simpleTable td:eq(4)").css({ 'background-color': 'green' });
+            //$(".simpleTable td:lt(3)").css({ 'background-color': 'yellow' });
+            //$(".simpleTable td:gt(5)").css({ 'background-color': 'orange' });
+
 
             //練習二
             //先將上面的練習都注解掉
             //將偶數格A0,C2,E4,G6,I8的背景色，設定成黃色 background-color:yellow
             //將數格B1,D3,F5,H7的背景色，設定成橘色 background-color:orange
+            //$(".simpleTable td:even").css({ 'background-color': 'orange' });
+            //$(".simpleTable td:odd").css({ 'background-color': 'yellow' });
+            // $(".simpleTable td:first").css({ 'background-color': 'orange' });
+            //$(".simpleTable td:last").css({ 'background-color': 'yellow' });
 
             //=============================
 
             //==== Child Filter Selectors ===========
+            //與父元素有關
+            //  $(".simpleTable td:first-child").css({ 'background-color': 'orange' });//0,3,6
+            //$(".simpleTable td:last-child").css({ 'background-color': 'yellow' });//2,5,8
+
+            //不是索引值
+            //$(".simpleTable td:nth-child(2)").css({ 'background-color': 'orange' });
+            //$(".simpleTable>tbody>tr:nth-child(2n)").css({ 'background-color': 'yellow' });//3,4,5
+            //$(".simpleTable>tbody>tr:nth-child(2n+1)").css({ 'background-color': 'orange' });
+            //$(".simpleTable>tbody>tr:nth-child(even)").css({ 'background-color': 'yellow' });//3,4,5
+            //$(".simpleTable>tbody>tr:nth-child(odd)").css({ 'background-color': 'orange' });
+            //$(".simpleTable>tbody>tr:nth-child(even)").css({ 'background-color': 'yellow' });//3,4,5
+            //$(".simpleTable>tbody>tr:nth-child(odd)").css({ 'background-color': 'orange' }); 
+            //$(".simpleTable>tbody>tr:nth-child(3n+1)").css({ 'background-color': 'yellow' });
+            $(".simpleTable tr:nth-child(3n+1)").css({ 'background-color': 'yellow' });//thead的第一行也是
+
+
+        
 
             //=============================
-            $("input:text").css('background-color', 'lightgreen')
-                .focusin(focusthis)
-                .focusout(blurthis)
+            $("input[type=text]").css('background-color', 'lightgreen')
+                .focus(focusthis)
+                .blur(blurthis)
 
         });
         function focusthis() {
