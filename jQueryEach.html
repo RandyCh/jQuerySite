@@ -92,25 +92,31 @@
             //value.name -> Jack
 
             //emps[1] -> { "name": "Mary", "salary": 42000, "workYears": 5 }
-            //emps[1].salary -> 42000
-            $.each(emps, function (idx, emp) {
-                //emp -> {}
-                console.log(emp.name)
-                console.log(emp.salary)
-                console.log(emp.workYears)
-            })
+            ////emps[1].salary -> 42000
+            //$.each(emps, function (idx, emp) {
+            //    //emp -> {}
+            //    console.log(emp.name)
+            //    console.log(emp.salary)
+            //    console.log(emp.workYears)
+            //})
 
-
-
-
-
-  
             //讀取JSON中的資料
             var data = {
                 emps: [{ name: "Jack", age: 29, contact: { home: "02-12345678", cell: "0911222333" } },
 	                  { name: "Mary", age: 35, contact: { home: "02-33116745", cell: "0932112654" } },
 	                  { name: "Tom", age: 26, contact: { home: "02-54346666", cell: "0955832123" } }]
             };
+            $.each(data, function (a, b)
+            {
+                console.log("start")
+                //console.log(data.emps)//3 array
+                console.log($.each(data.emps, function (a, b)
+                {
+                    console.log(b.name);
+                    console.log(b.age);
+                    $.each(b.contact, function (a, b) {console.log(b);})
+                }));
+            })
         });
     </script>
 </body>
