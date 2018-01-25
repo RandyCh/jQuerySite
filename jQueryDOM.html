@@ -94,18 +94,23 @@
                 //將這些資料顯示在span2的span中
                 //var v = $(this).val();
                 //var ind = $(this).index();
-               $("#span2").text($("#select1 :selected").text());
-               //$("#span2").text($("#select1 :selected").index());
+               // $("#span2").text($("#select1 :selected").text());
+                var sel = $('#select1>:selected');
+                var v = sel.val();
+                var t = sel.text();
+                var i = sel.index();
+
+               $("#span2").text(i+t+i);
 
             });
 
 
 
-            //找到網頁上的連結標籤，加上target=_blank屬性
+            //找到網頁上的連結標籤，加上target=_blank屬性 會新開一個分頁
+            //$("a").attr("target", "_blank");
 
             //找到網頁上要連結到外部網站的連結標籤，加上target=_blank屬性
-
-
+            $("a[href^='http']").attr("target", "_blank");
 
             //attr() vs prop()
 
@@ -122,20 +127,27 @@
             //console.log($(":checkbox:eq(3)").prop('checked'));
             //console.log($(":checkbox:eq(4)").prop('checked'));
             //console.log($(":checkbox:eq(5)").prop('checked'));
-
+            //checked disabled selected toggle要用prop去設定
             $('#Toggle').change(function () {
                 //切換所有checkbox的勾選狀態        	
+                console.log($(this).attr("checked"));//undefined
+                console.log($(this).prop("checked"));//true
+                var b = $(this).prop("checked");
+                $(":checkbox[name='a']").prop("checked", b);
 
             })
 
             $('#buttonToggle').click(function () {
                 //切換各自checkbox的勾選狀態
-
+                $(':checkbox[name="a"]').each(function () {
+                    var b = !$(this).prop("checked");
+                    $(this).prop("checked",b);
+                })
             });
 
             $('#buttonGet').click(function () {
                 //讀出所有被勾選checkbox的值
-
+                alert()
             });
 
 

@@ -45,6 +45,9 @@
                         <h1>write less, do more</h1>
                         <h1>write less, do more</h1>
                         <h1>write less, do more</h1>
+                        <div id="draggable" class="ui-widget-content">
+                            <p>Drag me around</p>
+                        </div>
                         <!-- 每頁不同的內容到這裡結束 -->
                     </div>
                 </div>
@@ -53,12 +56,15 @@
 
         <div id="section" class="row"></div>
         <footer class="footer"></footer>
+        
+
 
     </div>
 
 
     <script src="js/jquery-1.12.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
     <script>
         $(document).ready(function () {
             $('header').load('partial/header.html');
@@ -66,8 +72,33 @@
             $('#section').load('partial/section.html');
             $('footer').load('partial/footer.html');
 
+            $("h1").addClass("s1")
+                .hover(over, out);
+            function over() {
+                $(this).removeClass("s1", 1000).addClass("s2", 1000);
+            };
+            function out() {
+                $(this).removeClass("s2").addClass("s1", 1000);
+            };
+            $("#buttonToggle").click(function () {
+
+                var myh = $("#myH");
+                //if (myh.hasClass("s1")) {
+                //    myh.removeClass('s1')
+                //}
+                //else {
+                //    myh.addClass('s1')
+                //}
+                myh.toggleClass("s1");  //開關class s1
+            })
+
 
         });
+
+            $( function() {
+                $("#draggable").draggable();
+            } );
+
     </script>
 </body>
 

@@ -44,16 +44,67 @@
 
             //讀取陣列中的資料
             var names = ["Jack", "Tom", "Mary", "Fiona"];
+            //javascript
+            //console.log(names[2]);//Mary
+            //for (var i = 0, max = names.length; i < max; i++) {
+            //    console.log(names[i]);
+            //}
+            //jQuary
+            //$.each(names, function (a, b) {
+            //    //array
+            //    //function第一個參數是array index
+            //    //function第二個參數是array value
+            //    console.log(a);//0,1,2,3
+            //    console.log(b);//"Jack", "Tom", "Mary", "Fiona"
+            //});
+
+
+
+
 
             //讀取物件中的資料
             var emp = { "name": "Jack", "salary": 32000, "workYears": 2 };
+            //javascript
+            //console.log(emp.name);
+            //console.log(emp.salary);
+            //console.log(emp.workYears);
+            //jQuery
+            $.each(emp, function (a, b) {
+                //object
+                //function第一個參數是object key
+                //function第二個參數是object value
+                //console.log(a);//name, salary, workyears
+                //console.log(b);// jack, 32000,2
+               
+            
+            })
+            
+
+
 
             //讀取JSON中的資料
             var emps = [{ "name": "Jack", "salary": 32000, "workYears": 2 },
                         { "name": "Mary", "salary": 42000, "workYears": 5 },
                         { "name": "Tom", "salary": 52000, "workYears": 7 }];
+            //emps -> array
+            //[idx:value,idx:value]
+            //value -> object {}
+            //value.name -> Jack
+
+            //emps[1] -> { "name": "Mary", "salary": 42000, "workYears": 5 }
+            //emps[1].salary -> 42000
+            $.each(emps, function (idx, emp) {
+                //emp -> {}
+                console.log(emp.name)
+                console.log(emp.salary)
+                console.log(emp.workYears)
+            })
 
 
+
+
+
+  
             //讀取JSON中的資料
             var data = {
                 emps: [{ name: "Jack", age: 29, contact: { home: "02-12345678", cell: "0911222333" } },
