@@ -147,8 +147,25 @@
 
             $('#buttonGet').click(function () {
                 //讀出所有被勾選checkbox的值
-                alert()
+                //$(':checkbox').each(function () {
+                //    if($(this).prop('checked'))
+                //    {
+                //      // console.log($(this).val());
+                //        console.log($(this).val());
+                //        console.log($(this).text());
+                //    }
+                //});
+                $("input[type=checkbox]:checked").each(function () {
+                    console.log($(this).val());
+                });
             });
+
+                //$(':checkbox').each(function () {
+                //    
+                    
+                //})
+               
+
 
 
             //prepend() vs append() vs before() vs after()
