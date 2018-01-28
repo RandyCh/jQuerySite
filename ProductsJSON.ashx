@@ -8,32 +8,46 @@ using Newtonsoft.Json;
 using System.Configuration;
 
 public class ProductsJSON : IHttpHandler {
-    
+
     public void ProcessRequest (HttpContext context) {
-         String strConn = ConfigurationManager.ConnectionStrings["NorthwindConnectionString"].ConnectionString ;
-       
+        String strConn = ConfigurationManager.ConnectionStrings["NorthwindConnectionString"].ConnectionString ;//連線字串 存在web.config中
+
+
+
         using (SqlConnection conn = new SqlConnection(strConn))
         {
             string strCmd = "select ProductID,ProductName,unitPrice,unitsInStock from Products";
-            using (SqlDataAdapter da = new SqlDataAdapter(strCmd, conn))
+            using (SqlCommand cmd = new SqlCommand(strCmd, conn))
             {
-                DataSet ds = new DataSet();
-                da.Fill(ds, "product");
-                var dataProducts = new
-                {
-                    data = ds.Tables["product"]
-                };
-                context.Response.ContentType = "application/json";
-                context.Response.Write(JsonConvert.SerializeObject(dataProducts));
-             
+                conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
             }
-            
-       
+
+
+
+
+
+            //using (SqlDataAdapter da = new SqlDataAdapter(strCmd, conn))
+            //{
+            //    DataSet ds = new DataSet();
+            //    da.Fill(ds, "product");
+            //    var dataProducts = new
+            //    {
+            //        data = ds.Tables["product"]
+            //    };
+            //    context.Response.ContentType = "application/json";
+            //    context.Response.Write(JsonConvert.SerializeObject(dataProducts));
+
+            //}
+
+
+
         }
-        
-      
+
+
     }
- 
+
     public bool IsReusable {
         get {
             return false;

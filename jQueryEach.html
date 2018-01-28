@@ -106,17 +106,28 @@
 	                  { name: "Mary", age: 35, contact: { home: "02-33116745", cell: "0932112654" } },
 	                  { name: "Tom", age: 26, contact: { home: "02-54346666", cell: "0955832123" } }]
             };
-            $.each(data, function (a, b)
-            {
-                //console.log("start")
-                //console.log(data.emps)//3 array
-                console.log($.each(data.emps, function (a, b)
-                {
-                    console.log(b.name);
-                    console.log(b.age);
-                    $.each(b.contact, function (a, b) {console.log(b);})
-                }));
-            })
+            //$.each(data, function (a, b)
+            //{
+            //    //console.log("start")
+            //    //console.log(data.emps)//3 array
+            //    console.log($.each(data.emps, function (a, b)
+            //    {
+            //        console.log(b.name);
+            //        console.log(b.age);
+            //        $.each(b.contact, function (a, b) {console.log(b);})
+            //    }));
+            //})
+            //data={}object
+            //data.employee=[] array
+            //data.employee[2]={name: "Mary", age: 35, contact: { home: "02-33116745", cell: "0932112654" } } object
+            //data.employee[2].contact={ home: "02-33116745", cell: "0932112654" }
+            //data.employee[2].contact.cell="0932112654"
+
+            for (var i = 0, max = data.emps.length; i < max; i++) {
+                console.log(data.emps[i].name);//讀人名
+                console.log(data.emps[i].contact.cell);//讀手機
+            }
+            //jason.net比較好
         });
     </script>
 </body>
