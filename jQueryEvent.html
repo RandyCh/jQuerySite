@@ -73,19 +73,28 @@
             //使用one來繫結buttonOne按鈕的click事件
             //按下按鈕後在msg的div中顯示one的字樣
             //瀏覽網頁時,重複按下buttonOne按鈕,只會在div中出現一次one的字
-
-
+            //$("#buttonOne").click(function () {
+            //    $("#msg").append("one<br>");
+            //})
+            $("#buttonOne").one("click",function () {
+                $("#msg").append("one<br>");
+            })
+            //one 只能執行一次 on可以一直做
             //練習二
             //使用on來繫結buttonOn按鈕的click事件
             //按下按鈕後在msg的div中顯示on的字樣
             //瀏覽網頁時,重複按下buttonOn按鈕,會在div中重複出現on的字
 
+            $("#buttonOn").on("click", function () {
+                $("#msg").append("on<br>");
+            })
 
 
 
             $('#buttonOff').click(function () {
                 //練習三
                 //將buttonOn按鈕的click事件取消掉
+                $("#buttonOn").off("click");
 
             })
 
@@ -100,11 +109,33 @@
             //按下[add row]按鈕多新增幾筆資料
             //針對新增出來的資料,按下刪除按鈕(class名稱是btn-danger)時,還可以將那一筆資料刪除嗎???
             $('.btn-danger').click(function () {
-                $(this).parent().parent().remove();
+                //$(this).parent().parent().remove();
+                 //$(this).remove();//刪除按鈕
+                 //$(this).parent().remove();//刪除td
+                //$(this).parents("tr").remove();//往上找到tr 才刪除
+
+                //var row = $(this).parents("tr");
+                //console.log(row.children('td:eq(0)').text())//a0  eq是用索引值
+                //console.log(row.children('td:eq(1)').text())//b1
+                //console.log(row.children('td:eq(2)').text())//c2
+
+                var tb = $(this).parents("#simpleTable");
+
+                console.log(tb.find('td:eq(0)').text())
+                console.log(tb.find('td:first-child').text())
+            //    console.log(row.find('td:eq(1)').text())
+            //    console.log(row.find('td:eq(2)').text())
             })          
 
 
             //練習五使用on綁定網頁上刪除按鈕，完成刪除動作
+             //針對動態產生的元素也要能綁定事件
+            //動態生成的元素:檢視原始碼的時候沒有程式碼 但是畫面上有的部分
+            //因為在網頁生成的時候沒有元素 所以直接.click時沒有綁定事件
+            $('#simpleTable').on('click', '.btn-danger', function () {
+// 意思:在#simpleTable下動態生成.btn-danger 這個class的物件時綁定click事件
+                $(this).parents("tr").remove();
+            })    
 
 
             $('#buttonAdd').click(function () {

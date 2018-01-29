@@ -179,11 +179,24 @@
 
 
 
-            //prepend() vs append() vs before() vs after()
+ //prepend() vs append() vs before() vs after()
+            $('#myH').prepend("<u>u myH u</u>")
+                //.append("ssssss")
+                //.before("<s>iiiii</s>")
+                //.after("zzzz")
+   //$() 寫在$()中間的要有標籤才能認得
+
+            $('<u>prependTo</u>').prependTo('#myH');
+            $('<s>ssssss</s>').appendTo('#myH'); //<s></s>是刪除符號
+            //$(...) 
+
+ //empty() vs remove()
+            //$('#myH').empty()
+            //$('#myH').remove()
 
 
 
-            //empty() vs remove()
+
 
 
 

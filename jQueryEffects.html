@@ -63,6 +63,22 @@
             $('nav').load('partial/nav.html');
             $('#section').load('partial/section.html');
             $('footer').load('partial/footer.html');
+
+
+            $('#buttonShowHide').click(function () {
+                //$('#div1').hide(1000, function () {
+                //    $('#div1').show(1000)
+                //});
+                //$('#div1').slideUp(1000, function () {
+                //    $('#div1').slideDown(1000)
+                //});
+                $('#div1').fadeOut(1000, function () {
+                    $('#div1').fadeIn(1000)
+                });
+                //$('#div1').toggle(1000)
+                //$('#div1').slideToggle(1000)
+                //$('#div1').fadeToggle(1000)
+            })
         });
     </script>
 </body>

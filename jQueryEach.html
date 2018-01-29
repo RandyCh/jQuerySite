@@ -21,7 +21,20 @@
                     <div class="panel-body">
                         <!-- 每頁不同的內容從這裡開始 -->
                         <!-- 每頁不同的內容到這裡結束 -->
-                        <div id="div1"></div>
+                        <div id="div1">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>name</th>
+                                        <th>age</th>
+                                        <th>hoem phone</th>
+                                        <th>cell phone</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -124,38 +137,51 @@
             //data.employee[2].contact={ home: "02-33116745", cell: "0932112654" }
             //data.employee[2].contact.cell="0932112654"
 
-            for (var i = 0, max = data.emps.length; i < max; i++) {
-                console.log(data.emps[i].name);//讀人名
-                console.log(data.emps[i].contact.cell);//讀手機
-            }
-            //jason.net比較好
+            //for (var i = 0, max = data.emps.length; i < max; i++) {
+            //    console.log(data.emps[i].name);//讀人名
+            //    console.log(data.emps[i].contact.cell);//讀手機
+            //}
+            ////jason.net比較好
 
-            //$.each('??', function (a,b) {
-            //?? -> array [0:'a',1:'b',2:'c',index:value]
-            //第一個參數 0,1,2
-            //第二個參數 'a','b','c'
-            //?? -> object x {key(string):value,key:valu}
-            //第一個參數 key,key
-            //第二個參數 value,value,value
+            ////$.each('??', function (a,b) {
+            ////?? -> array [0:'a',1:'b',2:'c',index:value]
+            ////第一個參數 0,1,2
+            ////第二個參數 'a','b','c'
+            ////?? -> object x {key(string):value,key:valu}
+            ////第一個參數 key,key
+            ////第二個參數 value,value,value
+            ////})
+
+            ////data.emps = []
+            ////不要去讀物件
+            //var myDiv = $("#div1");
+            //var docFrag = $(document.createDocumentFragment());
+            //$.each(data.emps, function (idx, emp) {
+            //    //emp = { name: "Jack", age: 29, contact: { home: "02-12345678", cell: "0911222333" } }
+            //    //console.log(emp.name)//在知道屬性名稱條件下
+            //    //console.log(emp.age)
+            //    //var contact = emp.contact
+            //    //console.log(contact.home) //emp.contact = { home: "02-12345678", cell: "0911222333" }
+            //    //console.log(contact.cell)
+            //    var h = $("<h2></h2>").text(emp.name);  //$() 變成jquery物件
+            //   // $("#div1").append(h);
+            //    //$("#div1").prepend(h);  不要在迴圈中更新元素 會更新頁面
+            //    docFrag.append(h);
             //})
-
-            //data.emps = []
-            //不要去讀物件
+            //myDiv.html(docFrag);
             var myDiv = $("#div1");
             var docFrag = $(document.createDocumentFragment());
             $.each(data.emps, function (idx, emp) {
-                //emp = { name: "Jack", age: 29, contact: { home: "02-12345678", cell: "0911222333" } }
-                //console.log(emp.name)//在知道屬性名稱條件下
-                //console.log(emp.age)
-                //var contact = emp.contact
-                //console.log(contact.home) //emp.contact = { home: "02-12345678", cell: "0911222333" }
-                //console.log(contact.cell)
-                var h = $("<h2></h2>").text(emp.name);  //$() 變成jquery物件
-               // $("#div1").append(h);
-                //$("#div1").prepend(h);  不要在迴圈中更新元素 會更新頁面
-                docFrag.append(h);
-            })
-            myDiv.html(docFrag);
+                var cell1 = $("<td></td>").text(emp.name);
+                var cell2 = $("<td></td>").text(emp.age);
+                var contact = emp.contact;
+                var cell3 = $("<td></td>").text(contact.home);
+                var cell4 = $("<td></td>").text(contact.cell);
+                var row = $("<tr></tr>").append([cell1, cell2, cell3, cell4]);
+                docFrag.append(row);
+            });
+            $("#div1>table>tbody").html(docFrag);
+
         });
     </script>
 </body>
