@@ -6,9 +6,8 @@ using System.Web;
 public class Handler : IHttpHandler {
     
     public void ProcessRequest (HttpContext context) {
-            //get QuerySting['name']
-            //post Form['name']
-            //get post Params["name"]
+        //get QueryString["name"]
+        //post Form["name"]
         string strName = context.Request.Params["name"];
         string strAge = context.Request.Params["age"];
         context.Response.ContentType = "text/plain";

@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+</head>
+<body>
+    <header class="container"></header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <nav></nav>
+            </div>
+            <div class="col-md-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">jQuery writing style</div>
+                    <div class="panel-body">
+                        <!-- 每頁不同的內容從這裡開始 -->
+                        <h1>1write less, do more</h1>
+                        <h1>2write less, do more</h1>
+                        <h1>3write less, do more</h1>
+                        <h1>4write less, do more</h1>
+                        <h1>5write less, do more</h1>
+                        <!-- 每頁不同的內容到這裡結束 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="section" class="row"></div>
+        <footer class="footer"></footer>
+
+    </div>
+
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('header').load('partial/header.html');
+            $('nav').load('partial/nav.html');
+            $('#section').load('partial/section.html');
+            $('footer').load('partial/footer.html');
+
+            
+            //看到jQuery的方法重複使用時
+
+           
+            //document.getElementById("myH").onmouseover = over; //function () { }
+            //document.getElementById("myH").addEventListener("mouseover", over) //function () { })
+            //$('h1').mouseover(function () { })
+
+            //看到selectors重複時，要合併成一個 -> Chaining 鏈式語法
+            //$('selectors')
+            $('h1').css('background-color', 'lightgreen')
+                .mouseover(over)
+                .mouseout(out);
+
+            function over() {
+                //事件處理程序this表示觸發事件的物件 javascript物件
+                //console.log(this)
+                //this vs $(this)
+                //錯誤的寫法
+                //this.css('background-color', 'pink')
+                //$(this).style.backgroundColor = "yellow";
+
+                //JS
+                //this.style.backgroundColor = "pink";
+               
+                //jQuery  $(...) 就是把...轉成jQuery物件，之後才能用jQuery物件所提供的方法
+                $(this).css('background-color', 'pink')
+            }
+            function out() {
+                $(this).css('background-color', 'lightgreen')
+            }
+
+
+            //DOM 有效能的問題
+            var hs = document.querySelectorAll('h1');
+            for (var i = 0, max = hs.length; i < max; i++) {
+                hs[i].style.color = "green"
+                hs[i].addEventListener("mouseover", function () {
+                    this.style.color = "red"
+                })
+                hs[i].addEventListener("mouseout", function () {
+                    this.style.color = "green"
+                })
+            }
+
+            //var hs1 = document.querySelectorAll('h1');
+            //for (var i = 0, max = hs1.length; i < max; i++) {
+            //    hs1[i].addEventListener("mouseover", function () {
+            //        this.style.color = "red"
+            //    })
+            //}
+            //var hs2 = document.querySelectorAll('h1');
+            //for (var i = 0, max = hs2.length; i < max; i++) {
+            //    hs2[i].addEventListener("mouseout", function () {
+            //        this.style.color = "green"
+            //    })
+            //}
+        });
+    </script>
+</body>
+
+</html>

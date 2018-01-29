@@ -27,27 +27,32 @@
                         <input type="button" value="cors" id="buttonCORS" class="btn btn-success">
                         <img src="images/ajax-loader.gif" id="img1">
                         <hr>
+                        <select id="select1">
+                            <option value="CategoryID">CategoryName</option>
+                        </select>
+                        <table id="table1" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ProductID</th>
+                                    <th>ProductName</th>
+                                    <th>UnitPrice</th>
+                                    <th>UnitsInstock</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                         <div id="show" class="row">
+                            <!--<img src="http://parks.taipei/parkbasic/imagespace/specialview/original/thumb_image_3235340.JPG" class="col-sm-3 img-thumbnail">
                             <img src="http://parks.taipei/parkbasic/imagespace/specialview/original/thumb_image_3235340.JPG" class="col-sm-3 img-thumbnail">
                             <img src="http://parks.taipei/parkbasic/imagespace/specialview/original/thumb_image_3235340.JPG" class="col-sm-3 img-thumbnail">
                             <img src="http://parks.taipei/parkbasic/imagespace/specialview/original/thumb_image_3235340.JPG" class="col-sm-3 img-thumbnail">
                             <img src="http://parks.taipei/parkbasic/imagespace/specialview/original/thumb_image_3235340.JPG" class="col-sm-3 img-thumbnail">
                             <img src="http://parks.taipei/parkbasic/imagespace/specialview/original/thumb_image_3235340.JPG" class="col-sm-3 img-thumbnail">
                             <img src="http://parks.taipei/parkbasic/imagespace/specialview/original/thumb_image_3235340.JPG" class="col-sm-3 img-thumbnail">
-                            <img src="http://parks.taipei/parkbasic/imagespace/specialview/original/thumb_image_3235340.JPG" class="col-sm-3 img-thumbnail">
-                            <img src="http://parks.taipei/parkbasic/imagespace/specialview/original/thumb_image_3235340.JPG" class="col-sm-3 img-thumbnail">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>name</th>
-                                        <th>age</th>
-                                        <th>hoem phone</th>
-                                        <th>cell phone</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                            <select id="select1"></select>
+                            <img src="http://parks.taipei/parkbasic/imagespace/specialview/original/thumb_image_3235340.JPG" class="col-sm-3 img-thumbnail">-->
+                           
+                            
+
                         </div>
                         <hr>
                         <!-- 每頁不同的內容到這裡結束 -->
@@ -76,9 +81,9 @@
                 //1. 呼叫Handler.ashx
                 //2. 傳 name=Jack及age=30的資料給Handler.ashx
                 //3. 將Server端回傳的結果加上h2的標籤,顯示在show的div中
-                $.get("Handler.ashx", { "name": "Jack", "age": 30 }, function (data) {
-                    //data就是Handler.ashx回傳的結果
-                    $("#show").html("<h2>" + data + "</h2>");
+                $.get('Handler.ashx', { 'name': 'Jack', 'age': 30 }, function (data) {
+                    //data 就是Handler.ashx回傳的結果
+                    $('#show').html("<h2>" + data + "</h2>");
                 })
             });
 
@@ -87,9 +92,9 @@
                 //1. 呼叫Handler.ashx
                 //2. 傳 name=Mary及age=的25資料給Handler.ashx
                 //3. 將Server端回傳的結果加上h2的標籤,顯示在show的div中
-                $.post("Handler.ashx", { "name": "Jack", "age": 30 }, function (data) {
-                    //data就是Handler.ashx回傳的結果
-                    $("#show").html("<h2>" + data + "</h2>");
+                $.post('Handler.ashx', { 'name': 'Mary', 'age': 25 }, function (data) {
+                    //data 就是Handler.ashx回傳的結果
+                    $('#show').html("<h2>" + data + "</h2>");
                 })
             });
 
@@ -101,48 +106,57 @@
             //    //3. 將景點圖片顯示在show的div中
 
             //});
-            $.getJSON("ProductsJSONByCategory.ashx", { "categoryID": 1 }, function (datas) {
-                var docFrag = $(document.createDocumentFragment());
-                $.each(datas, function (idx, product) {
-                    var cell1 = $("<td></td>").text(product.ProductID);
-                    var cell2 = $("<td></td>").text(product.ProductName);
-                    var cell3 = $("<td></td>").text(product.unitPrice);
-                    var cell4 = $("<td></td>").text(product.unitsInStock);
-                    var row = $("<tr></tr>").append([cell1, cell2, cell3, cell4]);
-                    docFrag.append(row);
+
+            function loadProducts(id) {
+                $.getJSON('ProductsJSONByCategory.ashx', { 'categoryID': id }, function (datas) {
+                    var docFrag = $(document.createDocumentFragment());
+                    $.each(datas, function (idx, product) {
+                        var cell1 = $("<td></td>").text(product.ProductID);
+                        var cell2 = $("<td></td>").text(product.ProductName);
+                        var cell3 = $("<td></td>").text(product.unitPrice);
+                        var cell4 = $("<td></td>").text(product.unitsInStock);
+
+                        var row = $("<tr></tr>").append([cell1, cell2, cell3, cell4]);
+                        docFrag.append(row);
+                    })
+                    $('#table1>tbody').html(docFrag)
                 })
-                $("#show>table>tbody").html(docFrag);
+            }
+            loadProducts(1);
+
+            //xml
+            var sel = $('#select1');
+            $.ajax({
+                'type': 'GET',
+                'url': 'HandlerXml.ashx',
+                'dataType': 'xml'
+            }).done(function (datas) {
+                var categories = $(datas).find("Category");
+                var docFrag = $(document.createDocumentFragment());
+                categories.each(function () {
+
+                    var cid = $(this).children("CategoryId").text()
+                    var cname = $(this).children("CategoryName").text()
+
+                    var opt = $("<option></option>").text(cname).val(cid);
+                    docFrag.append(opt);
+                })
+                sel.html(docFrag);
+                });
+
+
+            sel.change(function () {
+                loadProducts($(this).val());
             })
+
 
 
             //$('#buttonAjax').click(function () {
             //    //練習四使用ajax()
             //    //1. 呼叫travel.xml
             //    //2. 讀出回傳xml格式中的景點圖片(Image)
-                //3. 將景點圖片顯示在show的div中
-                //Request
-                //1.server端哪支程式
-                //2.需不需傳資料給這支程式
+            //    //3. 將景點圖片顯示在show的div中
 
-                //Response
-                //3.接收資料
-                //4.讀取資料
-                //5.顯示資料$.ajax()
-                $.ajax({
-                    "type": "GET",
-                    "url": "HandlerXml.ashx",
-                    "dataType": "xml"
-                }).done(function (datas) {
-                    var categories = $(datas).find("Category");
-                    var docFrag = $(document.createDocumentFragment());
-                    categories.each(function () {
-                        var cid = $(this).children("CategoryId").text();
-                        var cname = $(this).children("CategoryName").text();
-                        var opt = $("<option></option>").text(cname).val(cid);
-                        docFrag.append(opt);
-                    })
-                    $("#selecet1").html(docFrag);
-                });
             //});
 
 
@@ -163,6 +177,11 @@
             //顯示server端的程式正在執行
             $('#img1').hide();
             //Ajax程式執行時，顯示執行中圖示，Ajax程式停止時，隱藏執行中圖示
+            $(document).ajaxStart(function () {
+                $('#img1').show(500);
+            }).ajaxStop(function () {
+                $('#img1').hide(500);
+            });
 
 
 

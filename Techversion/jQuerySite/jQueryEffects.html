@@ -13,12 +13,13 @@
 #alligator {
 	position: absolute;
 	left: 700px;
-	top: 350px;
+	top: 450px;
 }
 
 #img1 {
 	width: 490px;
 	height: 660px;
+    opacity:0.3;
 }
 </style>
 
@@ -57,6 +58,7 @@
 
     <script src="js/jquery-1.12.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-effects-ui.min.js"></script>
     <script>
         $(document).ready(function () {
             $('header').load('partial/header.html');
@@ -64,10 +66,9 @@
             $('#section').load('partial/section.html');
             $('footer').load('partial/footer.html');
 
-
             $('#buttonShowHide').click(function () {
-                $('#div1').hide("clip",1000, function () {
-                    $('#div1').show("slide",1000)
+                $('#div1').hide('explode',1000, function () {
+                    $('#div1').show('shake',1000)
                 });
                 //$('#div1').slideUp(1000, function () {
                 //    $('#div1').slideDown(1000)
@@ -75,21 +76,27 @@
                 //$('#div1').fadeOut(1000, function () {
                 //    $('#div1').fadeIn(1000)
                 //});
-                //$('#div1').toggle(1000)
+                //$('#div1').toggle('explode',1000)
                 //$('#div1').slideToggle(1000)
                 //$('#div1').fadeToggle(1000)
             })
-            //$("#img1").hover(function () {
-            //    $(this).fadeTo(1000, 1)
-            //}, function () {
-            //    $(this).fadeTo(500,0.3)
-            //})
-            $("#alligator").click(function () {
-                $(this).animate({ "left": "0px", "width": "100", "opacity": "0.3" }, 5000, function () { $(this).remove();})
-            });
+
+            $('#img1').hover(function () {
+                $(this).fadeTo(500,1)
+            }, function () {
+                $(this).fadeTo(500, 0.3)
+                })
+
+            $('#alligator').click(function () {
+                $(this).animate({
+                    'left': '0px',
+                    'width': '50px',
+                    'top': '0px',
+                    'opacity':'0.1'
+                }, 5000)
+            })
         });
     </script>
-    <script src="js/jquery-ui.min.js"></script>
 </body>
 
 </html>
