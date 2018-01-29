@@ -21,6 +21,7 @@
                     <div class="panel-body">
                         <!-- 每頁不同的內容從這裡開始 -->
                         <!-- 每頁不同的內容到這裡結束 -->
+                        <div id="div1"></div>
                     </div>
                 </div>
             </div>
@@ -128,6 +129,33 @@
                 console.log(data.emps[i].contact.cell);//讀手機
             }
             //jason.net比較好
+
+            //$.each('??', function (a,b) {
+            //?? -> array [0:'a',1:'b',2:'c',index:value]
+            //第一個參數 0,1,2
+            //第二個參數 'a','b','c'
+            //?? -> object x {key(string):value,key:valu}
+            //第一個參數 key,key
+            //第二個參數 value,value,value
+            //})
+
+            //data.emps = []
+            //不要去讀物件
+            var myDiv = $("#div1");
+            var docFrag = $(document.createDocumentFragment());
+            $.each(data.emps, function (idx, emp) {
+                //emp = { name: "Jack", age: 29, contact: { home: "02-12345678", cell: "0911222333" } }
+                //console.log(emp.name)//在知道屬性名稱條件下
+                //console.log(emp.age)
+                //var contact = emp.contact
+                //console.log(contact.home) //emp.contact = { home: "02-12345678", cell: "0911222333" }
+                //console.log(contact.cell)
+                var h = $("<h2></h2>").text(emp.name);  //$() 變成jquery物件
+               // $("#div1").append(h);
+                //$("#div1").prepend(h);  不要在迴圈中更新元素 會更新頁面
+                docFrag.append(h);
+            })
+            myDiv.html(docFrag);
         });
     </script>
 </body>
