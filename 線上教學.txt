@@ -22,3 +22,7 @@ Response
 5.顯示資料
 
 http://edu.iiiedu.org.tw
+
+
+Effect :顯示隱藏 淡入淡出 animate slideup fadeout toggle
+JQueryEvent :on(),off(),one(),動態生成的元素綁定事件
